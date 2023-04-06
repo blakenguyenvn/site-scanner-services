@@ -3,7 +3,7 @@ import { Scraper, SCRAPING_RESULT_PATH } from "../shared/Scraper";
 require("dotenv").config();
 
 const BASE_URL = process.env.BASE_URL || "";
-console.log("BASE_URL: ", BASE_URL);
+
 interface Site {
 	content: any;
 	image: string;
