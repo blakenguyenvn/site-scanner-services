@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { Scraper, SCRAPING_RESULT_PATH } from "../shared/Scraper";
+import { Scraper } from "../shared/Scraper";
 require("dotenv").config();
 
 const BASE_URL = process.env.BASE_URL || "";
@@ -16,13 +16,13 @@ export const ScrapingController = async (
 ) => {
 	const { site = "", selector = "" } = request.body;
 	const scraper = new Scraper(site, selector);
-	const scraperResult = await scraper.scrap();
+	await scraper.scrap();
 
 	response.status(200).json({
 		success: true,
 		result: {
-			page: `${BASE_URL}/${SCRAPING_RESULT_PATH.PAGE}`,
-			selector: `${BASE_URL}/${SCRAPING_RESULT_PATH.SELECTOR}`
+			page: `${BASE_URL}/${scraper.result?.page}`,
+			selector: `${BASE_URL}/${scraper.result?.selector}`
 		}
 	});
 };
