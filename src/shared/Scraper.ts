@@ -20,7 +20,9 @@ export class Scraper {
 
 	async scrap() {
 		try {
-			this.browser = await puppeteer.launch();
+			this.browser = await puppeteer.launch({
+				args: ["--disable-setuid-sandbox", "--no-sandbox"]
+			});
 			this.result = {
 				page: generateFilePath("page"),
 				selector: generateFilePath("selector")
